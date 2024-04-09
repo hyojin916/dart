@@ -12,8 +12,9 @@ void main() {
   print(sum);
 
   loop();
-
+  exception();
 }
+
 void fun1() {
   bool isTrue = true;
   int standard = 0;
@@ -31,16 +32,18 @@ void fun1() {
 void fun2() {
   int num = 100;
   switch (num) {
-    case 1: print('$num 이건 1');
-    case 2: print('$num 이건 2');
-    case > 10
-        : print('$num 이건 10 이상');
-    default: print('not 1, 2');
+    case 1:
+      print('$num 이건 1');
+    case 2:
+      print('$num 이건 2');
+    case > 10:
+      print('$num 이건 10 이상');
+    default:
+      print('not 1, 2');
   }
 }
 
 int add(int num1, int num2) {
-
   return num1 + num2;
 }
 
@@ -78,6 +81,29 @@ void loop() {
     if (num2 == 4) continue; // 여기 함수는 진행 되지 않음
 
     print('do while $num2');
-
   } while (num2 < 10);
+}
+
+void exception() {
+  try {
+    print(10 ~/ 0);  
+  } catch(err, stack) {
+    print(err);
+    print(stack);
+  } finally {
+    print('무조건 마지막에 실행함');
+  }
+
+  print('위의 에러 때문에 동작 안함');
+
+  int? num;
+  try {
+    print(num!);
+    // throw Exception('코드가 의도하지 앟게 흘러가는걸 막을 수 있지~');
+  } on UnsupportedError catch(err, stack) {
+    print('~/ 해당 연산자는 0으로 나눌 수 없습니다.');
+  } on TypeError catch(err, stack) {
+    print('Null 값이 참조 되었습니다.');
+  }
+
 }
