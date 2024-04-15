@@ -27,19 +27,19 @@ void main() {
   // todo(1);
   // todo(5);
 
-  Stream<int> todo2() async*{
+  Stream<int> todo2() async* {
     int counter = 0;
 
-    while(counter <= 10) {
-    counter++;
-    await Future.delayed(Duration(seconds: 1));
-    print('Todo is running $counter');
-    yield counter;
+    while (counter <= 10) {
+      counter++;
+      await Future.delayed(Duration(seconds: 1));
+      print('Todo is running $counter');
+      yield counter;
     }
     print('Todo is Done');
   }
 
-  todo2().listen((event) { });
+  todo2().listen((event) {});
 }
 
 void fun1() {
