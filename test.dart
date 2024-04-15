@@ -13,6 +13,33 @@ void main() {
 
   loop();
   exception();
+
+  // 비동기 프로그래밍
+  /// async / await / Future : 1회만 응답을 돌려받을 경우
+  /// async* / yield / Stream : 지속적으로 응답을 돌려받을 경우
+
+  Future<void> todo(int second) async {
+    await Future.delayed(Duration(seconds: second));
+    print('Todo done in $second second');
+  }
+
+  // todo(3);
+  // todo(1);
+  // todo(5);
+
+  Stream<int> todo2() async*{
+    int counter = 0;
+
+    while(counter <= 10) {
+    counter++;
+    await Future.delayed(Duration(seconds: 1));
+    print('Todo is running $counter');
+    yield counter;
+    }
+    print('Todo is Done');
+  }
+
+  todo2().listen((event) { });
 }
 
 void fun1() {
@@ -86,8 +113,8 @@ void loop() {
 
 void exception() {
   try {
-    print(10 ~/ 0);  
-  } catch(err, stack) {
+    print(10 ~/ 0);
+  } catch (err, stack) {
     print(err);
     print(stack);
   } finally {
@@ -100,10 +127,9 @@ void exception() {
   try {
     print(num!);
     // throw Exception('코드가 의도하지 앟게 흘러가는걸 막을 수 있지~');
-  } on UnsupportedError catch(err, stack) {
+  } on UnsupportedError catch (err, stack) {
     print('~/ 해당 연산자는 0으로 나눌 수 없습니다.');
-  } on TypeError catch(err, stack) {
+  } on TypeError catch (err, stack) {
     print('Null 값이 참조 되었습니다.');
   }
-
 }
